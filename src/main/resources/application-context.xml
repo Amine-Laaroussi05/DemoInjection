@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+
+        <!--Configurer les beans à déclarer dans notre contexte spring-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <!-- Ajout bean pour instrument guitare-->
+       <bean id="guitare" class="entity.Guitare"/>
+       <!-- À noter que Spring ne peut utiliser QUE les éléments publics !!! -->
+
+       <!-- Ajout bean pour le musicien guitariste-->
+       <bean id="guitariste" class="entity.Guitariste">
+              <!-- Injection des dépendances via le constructeur             -->
+              <constructor-arg index="0" value="Jimmy"/>
+              <constructor-arg index="1" ref="guitare"/>
+       </bean>
+
+       <!-- Déclaration d'un instrument bean piano      -->
+       <bean id="piano" class="entity.Piano"/>
+
+       <!-- Déclaration d'un bean Musicien pianiste       -->
+       <bean id="pianiste" class="entity.Pianiste">
+              <!-- Injection d'une dépendance par propriété            -->
+              <property name="nom">
+                     <value>
+                            Betthoven
+                     </value>
+              </property>
+              <property name="instrument">
+                     <ref bean="piano"/>
+              </property>
+       </bean>
+
+       <!-- À partir d'ici, c'est Spring qui va se charger d'instancier les beans pour les utiliser      -->
+
+</beans>
+
