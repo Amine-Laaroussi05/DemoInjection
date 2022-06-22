@@ -3,6 +3,8 @@ import entity.Guitariste;
 import entity.Instrument;
 import entity.Musicien;
 import factory.MusicienFactory;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 
@@ -29,6 +31,17 @@ public class Main {
     }
 
 
+    public static void withApplicationContexteXml(){
+//        Charger mon contexte
+        AbstractApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+        Musicien guitariste = (Musicien) context.getBean("guitariste");
+        guitariste.jouer();
+        Musicien pianiste = (Musicien) context.getBean("pianiste");
+        pianiste.jouer();
+
+//        Fermer le contexte
+        context.close();
+    }
 
     public static void main(String[] args) {
 
@@ -36,5 +49,7 @@ public class Main {
         dependanceDirecte();
         System.out.println(" ====== Injection de dépendance ======");
         injectionDependance();
+        System.out.println(" ======= Utilisation du contexte ======");
+        withApplicationContexteXml();
     }
 }

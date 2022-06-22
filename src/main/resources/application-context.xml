@@ -25,11 +25,7 @@
        <!-- Déclaration d'un bean Musicien pianiste       -->
        <bean id="pianiste" class="entity.Pianiste">
               <!-- Injection d'une dépendance par propriété            -->
-              <property name="nom">
-                     <value>
-                            Betthoven
-                     </value>
-              </property>
+              <property name="nom" value="Betthoven"> </property>
               <property name="instrument">
                      <ref bean="piano"/>
               </property>
