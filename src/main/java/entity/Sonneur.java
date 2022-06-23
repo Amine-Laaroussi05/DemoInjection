@@ -1,11 +1,15 @@
 package entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Sonneur implements Musicien{
 
     private String nom;
     @Autowired
+    @Qualifier(value = "cornemuse")
     private Instrument instrument;
 
     public String getNom() {
