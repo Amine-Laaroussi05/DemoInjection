@@ -1,8 +1,11 @@
 package entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class Sonneur implements Musicien{
 
     private String nom;
+    @Autowired
     private Instrument instrument;
 
     public String getNom() {

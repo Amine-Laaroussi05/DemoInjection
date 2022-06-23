@@ -1,10 +1,13 @@
+import config.AppConfigSpring;
 import entity.Guitare;
 import entity.Guitariste;
 import entity.Instrument;
 import entity.Musicien;
 import factory.MusicienFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 public class Main {
 
@@ -43,6 +46,20 @@ public class Main {
         context.close();
     }
 
+
+    public static void withAppContextClass(){
+//        Charger mon contexte
+
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfigSpring.class);
+        Instrument cornemuse = (Instrument) context.getBean("cornemuse");
+        System.out.println(cornemuse);
+        Musicien sonneur = (Musicien) context.getBean("sonneur");
+        sonneur.jouer();
+
+//        Fermer le contexte
+        context.close();
+    }
+
     public static void main(String[] args) {
 
         System.out.println(" ====== dépendance directe =======");
@@ -51,5 +68,7 @@ public class Main {
         injectionDependance();
         System.out.println(" ======= Utilisation du contexte ======");
         withApplicationContexteXml();
+        System.out.println("====== Utilisation de la classe de configuration ======");
+        withAppContextClass();
     }
 }
